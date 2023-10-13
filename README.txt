@@ -3,3 +3,5 @@ steps to create a blueprint:
 - check the game version by decoding a random bp string into json and reading the version at the end
 - put your version number into the string on line 43
 - start the program and choose a png file (remember to include the file extension), output is bp.txt
+
+the config can have multiple presets, change them by changing the import

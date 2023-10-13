@@ -2,7 +2,7 @@ import base64
 import zlib
 import png
 import json
-from config import tile_to_color
+from config import full_py as tile_to_color
 
 def mse(pixel: list, ref: list) -> float:
     """error between tile and reference"""
