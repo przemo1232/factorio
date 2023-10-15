@@ -24,7 +24,7 @@ class Pixel:
         """error between tile and reference"""
         err = 0
         for x, y in zip(self.values, ref):
-            err += (min(max(0, x), 255)-y)**2
+            err += (x-y)**2
         return err / 3
 
     def choose_tile(self):
@@ -42,7 +42,7 @@ class Pixel:
     
     def add_values(self, values: list):
         for i, err_value in enumerate(values):
-            self.values[i] += err_value
+            self.values[i] = min(max(self.values[i] + err_value, 0), 255)
 
 def dither(pixel: Pixel, err: list, width: int, height: int, pixels: list[Pixel]):
     """Floyd-Steinberg dithering"""
