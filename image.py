@@ -2,7 +2,7 @@ import base64
 import zlib
 import png
 import json
-from config import full_py as tile_to_color
+from config import full_py as tile_to_color, do_dither, do_grayscale
 
 class Pixel:
     values = []
@@ -11,13 +11,20 @@ class Pixel:
     y = 0
     tile = ''
     def __init__(self, colors):
-        self.values = colors[0:3]
+        if do_grayscale:
+            value = 0
+            for color in colors[0:3]:
+                value += color
+            value = value // 3
+            self.values = [value, value, value]
+        else:
+            self.values = colors[0:3]
 
     def mse(self, ref: list) -> float:
         """error between tile and reference"""
         err = 0
         for x, y in zip(self.values, ref):
-            err += (x-y)**2
+            err += (min(max(0, x), 255)-y)**2
         return err / 3
 
     def choose_tile(self):
@@ -70,11 +77,11 @@ def make_string(in_filename: str, out_filename: str):
         pixel.x = i % width
         pixel.y = i // width
         err = pixel.choose_tile()
-        dither(pixel, err, width, height, pixels)
+        if do_dither: dither(pixel, err, width, height, pixels)
         tiles.append(pixel.tile)
 
     # actually making the json
-    output = {'blueprint': {'tiles': [], 'item': 'blueprint', 'version': 281479277707264}}
+    output = {'blueprint': {'tiles': [], 'item': 'blueprint', 'label': in_filename.removesuffix('.png'), 'version': 281479277707264}}
     for i, tile in enumerate(tiles):
         output['blueprint']['tiles'].append({
             'position': {'x': i % width, 'y': i // width},
@@ -119,6 +126,9 @@ def read_json(in_filename: str,  out_filename: str):
 
 choice = input('choose mode (1-3):\n1. make bp string from png file\n2. decode bp string into json\n3. encode json into string\n')
 input_file = input('choose input file\n')
+if not input_file.endswith('.png'):
+    input_file += '.png'
+
 if choice == '1':
     make_string(input_file, 'bp.txt')
 elif choice == '2':

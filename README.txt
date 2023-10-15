@@ -5,3 +5,4 @@ steps to create a blueprint:
 - start the program and choose a png file (remember to include the file extension), output is bp.txt
 
 the config can have multiple presets, change them by changing the import
+dithering as well as grayscale can be toggled in the config

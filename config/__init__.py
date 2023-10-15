@@ -1,3 +1,6 @@
+do_dither = True
+do_grayscale = False
+
 # tile_name: [r, g, b]
 full_py = {
     'red-refined-concrete': [208, 6, 0],
@@ -154,4 +157,16 @@ colour_tile = {
     'ct_1122': [252, 252, 126],
     'ct_1123': [252, 252, 189],
     'ct_1124': [252, 252, 252]
+}
+
+grayscale = {
+    'py-steel': [0, 0, 0],
+    'lab-dark-1': [49, 49, 49],
+    'refined-concrete': [49, 48, 45],
+    'concrete': [63, 61, 59],
+    'py-limestone': [255, 255, 255],
+    'black-refined-concrete': [26, 26, 26],
+    'py-aluminium': [100, 100, 100],
+    'py-iron': [130, 130, 130],
+    'stone-path': [86, 82, 74],
 }
