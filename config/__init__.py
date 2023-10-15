@@ -1,3 +1,4 @@
+# tile_name: [r, g, b]
 full_py = {
     'red-refined-concrete': [208, 6, 0],
     'green-refined-concrete': [24, 196, 44],

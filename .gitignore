@@ -1,1 +1,4 @@
 *.pyc
+*.png
+bp.txt
+*.code-workspace
