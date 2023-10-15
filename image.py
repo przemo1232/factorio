@@ -40,11 +40,9 @@ class Pixel:
 def dither(pixel: Pixel, err: list, width: int, height: int, pixels: list[Pixel]):
     """Floyd-Steinberg dithering"""
     if pixel.x < width - 1:
-        print(f"old: {pixels[pixel.pos + 1].values}")
         pixels[pixel.pos + 1].add_values([value * 7 for value in err])
         if pixel.y < height - 1:
             pixels[pixel.pos + width + 1].add_values(err)
-        print(f"new: {pixels[pixel.pos + 1].values}")
     if pixel.y < height - 1:
         pixels[pixel.pos + width - 1].add_values([value * 3 for value in err])
         pixels[pixel.pos + width].add_values([value * 5 for value in err])
